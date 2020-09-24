@@ -80,3 +80,11 @@ if (numGuess >= 1 && numGuess <= 10) {
 } else {
   console.log('Please guess a number between 1 and 10')
 }
+
+const age = 78
+
+if (age < 6 || age >= 65) {
+  console.log('You get in for free!')
+} else {
+  console.log('You must pay!')
+}
