@@ -62,6 +62,9 @@ NaN
 everything else is truthy!!
 */
 
+// operator precedence
+// ! && ||
+
 // eslint-disable-next-line no-self-compare
 if (1 <= 4 && 'a' === 'a') {
   console.log('This was true')
@@ -87,4 +90,39 @@ if (age < 6 || age >= 65) {
   console.log('You get in for free!')
 } else {
   console.log('You must pay!')
+}
+
+const color = 'lilac'
+
+if (color === 'purple' || color === 'lilac' || color === 'violet') {
+  console.log('Great Choice!')
+}
+
+// switch
+const day = 3
+
+switch (day) {
+  case 1:
+    console.log('Monday')
+    break
+  case 2:
+    console.log('Tuesday')
+    break
+  case 3:
+    console.log('Wednesday')
+    break
+  case 4:
+    console.log('Thursday')
+    break
+  case 5:
+    console.log('Friday')
+    break
+  case 6:
+    console.log('Saturday')
+    break
+  case 7:
+    console.log('Sunday')
+    break
+  default:
+    console.log('Invalid selection')
 }
