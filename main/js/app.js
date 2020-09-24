@@ -32,8 +32,9 @@ if (userScore >= highScore) {
   console.log(`Congrats! You have a new high score of ${userScore}`)
   highScore = userScore
 } else {
-  console.log(`Good game, your score of ${userScore} did /
-  not beat the highscore of ${highScore}`)
+  console.log(
+    `Good game, your score of ${userScore} did not beat the highscore of ${highScore}`
+  )
 }
 
 const password = 'abanana'
@@ -60,3 +61,22 @@ NaN
 
 everything else is truthy!!
 */
+
+// eslint-disable-next-line no-self-compare
+if (1 <= 4 && 'a' === 'a') {
+  console.log('This was true')
+}
+
+if (password.length >= 6 && password.indexOf(' ') === -1) {
+  console.log('Valid Password!')
+} else {
+  console.log('INVALID PASSWORD')
+}
+
+const numGuess = 3
+
+if (numGuess >= 1 && numGuess <= 10) {
+  console.log('Number is between 1 and 10')
+} else {
+  console.log('Please guess a number between 1 and 10')
+}
