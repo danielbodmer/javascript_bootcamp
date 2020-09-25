@@ -141,3 +141,30 @@ otherRefs.pop();
 console.log(refs);
 
 // Using const with Arrays
+const myEggs = ['brown', 'brown']; // can still be changed as reference address is not const
+myEggs.push('purple');
+console.log(myEggs);
+// new array cannot be created to existing const > myEggs['blue', 'pink'] <! will not work!
+// prefer to use const for arrays
+
+// Working with Nested Arrays
+const colorsNested = [
+  ['red', 'crimson'],
+  ['orange', 'dark orange'],
+  ['yellow', 'golden rod'],
+  ['green', 'olive'],
+  ['blue', 'navy blue'],
+  ['purple', 'orchid'],
+];
+
+const animalPairs = [
+  ['doe', 'buck'],
+  ['ewe', 'ram'],
+  ['peahen', 'peacock'],
+];
+
+console.log(animalPairs);
+console.log(animalPairs[2][0]);
+console.log(animalPairs[2][1]);
+animalPairs[0][1] = 'stag';
+console.log(animalPairs);
