@@ -126,3 +126,11 @@ switch (day) {
   default:
     console.log('Invalid selection')
 }
+
+// ternary operator ? : condition ? expIfTrue : expIfFalse
+let number = 7
+number === 7 ? console.log('odd') : console.log('even')
+
+let status = 'offline'
+const colorStatus = status === 'offline' ? 'red' : 'green'
+console.log(colorStatus)
