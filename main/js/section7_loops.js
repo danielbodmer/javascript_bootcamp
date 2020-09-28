@@ -174,3 +174,33 @@ for (let review of Object.values(movieReviews)) {
 for (let movie of Object.keys(movieReviews)) {
   console.log(movie, movieReviews[movie]);
 }
+const ratings = Object.values(movieReviews); // turn to iterable array
+let total = 0;
+for (let r of ratings) {
+  total += r;
+}
+console.log(`Average rating: ${total / ratings.length}`);
+
+// for in - iterate over index (keys)!
+/*
+for (variable in object) {
+  statement
+}
+*/
+const jeopardyWinnings = {
+  regularPlay: 2522700,
+  watsonChallenge: 300000,
+  tournamentOfChampions: 500000,
+  battleOfTheDecades: 100000,
+};
+for (let key in jeopardyWinnings) {
+  console.log(key);
+}
+for (let key in jeopardyWinnings) {
+  console.log(jeopardyWinnings[key]);
+}
+let winnings = 0;
+for (let key in jeopardyWinnings) {
+  winnings += jeopardyWinnings[key];
+}
+console.log(`Total Winnings: ${winnings}`);
