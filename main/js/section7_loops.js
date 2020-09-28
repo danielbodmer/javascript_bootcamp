@@ -66,3 +66,111 @@ const averageGrade = sumOfGrades / myStudents.length;
 console.log(`The average grade of the students is ${averageGrade}`);
 
 // nested for loops
+let str = 'LOL';
+for (let i = 0; i <= 4; i++) {
+  console.log('Outer', i);
+  for (let j = 0; j < str.length; j++) {
+    console.log('\tInner: ', str[j]);
+  }
+}
+
+const gameBoard = [
+  [4, 32, 8, 4],
+  [64, 8, 32, 2],
+  [8, 32, 16, 4],
+  [2, 8, 4, 2],
+];
+
+let totalScore = 0;
+for (let i = 0; i < gameBoard.length; i++) {
+  let row = gameBoard[i];
+  for (let j = 0; j < row.length; j++) {
+    totalScore += row[j];
+  }
+}
+console.log(`The total score is: ${totalScore}`);
+
+// while loops
+let j = 0;
+while (j <= 5) {
+  console.log(j);
+  j++;
+}
+
+const target = Math.floor(Math.random() * 10);
+let guess = Math.floor(Math.random() * 10);
+
+while (guess !== target) {
+  console.log(`You guessed: ${guess}. Incorrect!`);
+  guess = Math.floor(Math.random() * 10);
+}
+console.log(`The correct number was ${target}`);
+
+// break keyword - exit out of a loop (more common in while loops)
+// on nested loops, only breaks the current loop, not outer loops
+while (true) {
+  if (guess === target) break;
+  console.log(`Target: ${target} Guess: ${guess}`);
+  guess = Math.floor(Math.random() * 10);
+}
+console.log(`Target: ${target} Guess: ${guess}`);
+console.log('Congrats! You Win!!!');
+
+// for...of loop - iterate over arrays (elements not indices)
+/*
+for (variable of iterable) {
+  statement
+}
+*/
+let subReddits = ['soccer', 'popheads', 'cringe', 'books'];
+for (let sub of subReddits) {
+  console.log(sub);
+}
+for (let char of 'danny') {
+  console.log(char.toUpperCase());
+}
+
+const magicSquare = [
+  [2, 7, 6],
+  [9, 5, 1],
+  [4, 3, 8],
+];
+
+for (let i = 0; i < magicSquare.length; i++) {
+  let row = magicSquare[i];
+  let sum = 0;
+  for (let j = 0; j < row.length; j++) {
+    console.log(row[j]);
+    sum += row[j];
+  }
+  console.log(`${row} total: ${sum}`);
+}
+
+for (let row of magicSquare) {
+  let sum = 0;
+  for (let num of row) {
+    sum += num;
+  }
+  console.log(`${row} total: ${sum}`);
+}
+
+// for of with objects (not iterable!) - have to loop over keys or values instead
+const movieReviews = {
+  Arrival: 9.5,
+  Alien: 9,
+  Amelie: 8,
+  'In Bruges': 9,
+  Amadeus: 10,
+  'Kill Bill': 8,
+  'Little Miss Sunshine': 8.5,
+  Coraline: 7.5,
+};
+for (let movie of Object.keys(movieReviews)) {
+  console.log(movie);
+}
+for (let review of Object.values(movieReviews)) {
+  console.log(review);
+}
+for (let movie of Object.keys(movieReviews)) {
+  console.log(movie, movieReviews[movie]);
+}
