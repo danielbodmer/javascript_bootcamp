@@ -70,5 +70,59 @@ console.log(avg([1, 2, 3]));
 console.log(avg([75, 76, 80, 95, 100]));
 
 // challenge 3: Pangrams
+function isPangram(sentence) {
+  const lower = sentence.toLowerCase();
+  const letterCount = {};
+
+  for (char of lower) {
+    if (char.match(/[a-z]/i)) {
+      letterCount[char] = (letterCount[char] || 0) + 1;
+    }
+  }
+  return Object.keys(letterCount).length >= 26;
+}
+console.log(isPangram('The quick brown fox jumps over the lazy dog'));
+console.log(isPangram('The five boxing wizards jump quickly'));
+console.log(isPangram('The five boxing wizards jump quick'));
+
+function isPangramSolution(sentence) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+  for (let char of alphabet) {
+    if (!sentence.toLowerCase().includes(char)) {
+      return false;
+    }
+  }
+  return true;
+}
 
 // challenge 4: Get Playing Card
+function getCard() {
+  const value = [
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'Jack',
+    'Queen',
+    'King',
+    'Ace',
+  ];
+  const suit = ['clubs', 'spades', 'hearts', 'diamonds'];
+  const card = {};
+
+  card.value = value[Math.floor(Math.random() * 13)];
+  card.suit = suit[Math.floor(Math.random() * 4)];
+
+  return card;
+}
+
+for (i = 0; i < 10; i++) {
+  const card = getCard();
+  console.log(`Your card is the ${card.value} of ${card.suit}`);
+}
