@@ -97,6 +97,9 @@ function isPangramSolution(sentence) {
 }
 
 // challenge 4: Get Playing Card
+function pickRandom(length) {
+  return Math.floor(Math.random() * length);
+}
 function getCard() {
   const value = [
     '2',
@@ -114,12 +117,11 @@ function getCard() {
     'Ace',
   ];
   const suit = ['clubs', 'spades', 'hearts', 'diamonds'];
-  const card = {};
 
-  card.value = value[Math.floor(Math.random() * value.length)];
-  card.suit = suit[Math.floor(Math.random() * suit.length)];
-
-  return card;
+  return {
+    value: value[pickRandom(value.length)],
+    suit: suit[pickRandom(suit.length)],
+  };
 }
 
 for (i = 0; i < 10; i++) {
