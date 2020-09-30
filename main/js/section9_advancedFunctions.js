@@ -53,10 +53,63 @@ const thing = {
 };
 console.log(thing.doSomething(6, 2));
 
-// functions as arguments
+// functions as arguments - don't use () in arg when passing function!
+function callTwice(func) {
+  func();
+  func();
+}
+const laugh = () => console.log('Ha Ha Ha Ha');
+callTwice(laugh);
 
-// functions as return values
+function repeatNTimes(func, n) {
+  for (let i = 0; i < n; i++) {
+    func();
+  }
+}
+const sayMyName = () => console.log(`Hello, Danny!`);
+repeatNTimes(sayMyName, 5);
 
-// callbacks
+function callOne(f1, f2) {
+  const rand = Math.random();
+  if (rand < 0.5) {
+    f1();
+  } else {
+    f2();
+  }
+}
+callOne(sayMyName, laugh);
 
+// functions as return values - function factory/template!
+function multiplyBy(num) {
+  return (x) => num * x;
+}
+const triple = multiplyBy(3);
+console.log(triple(5));
+const double = multiplyBy(2);
+console.log(double(10));
+
+makeBetween = (min, max) => (age) => age >= min && age <= max;
+
+const isChild = makeBetween(0, 17);
+const isAdult = makeBetween(18, 120);
+const isTheNinties = makeBetween(1990, 1999);
+
+console.log(isChild(5));
+console.log(isChild(19));
+console.log(isAdult(47));
+console.log(isAdult(17));
+console.log(isTheNinties(1991));
+console.log(isTheNinties(1988));
+
+// callbacks - function passed to function and executed within function - tend to use anonymous functions i.e. setTimeout(func, time in ms)
+// use anonymouse function for one time use!
+setTimeout(function () {
+  console.log('I triggered after 2 seconds!');
+}, 2000);
+setTimeout(() => console.log('Hello!'), 5000);
+
+const btn = document.querySelector('button');
+btn.addEventListener('click', function () {
+  alert('I told you not to click me!');
+});
 // hoisting
