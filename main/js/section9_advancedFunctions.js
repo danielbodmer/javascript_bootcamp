@@ -112,4 +112,6 @@ const btn = document.querySelector('button');
 btn.addEventListener('click', function () {
   alert('I told you not to click me!');
 });
+
 // hoisting
+// var gets hoisted, let/const do not
