@@ -172,4 +172,68 @@ const results = books.filter((book) =>
 const everyWords = ['dog', 'dig', 'log', 'bag', 'wag'];
 const everyResult = everyWords.every((word) => word.length === 3);
 console.log(everyResult);
-// .some() - boolean -
+// .some() - boolean - returns true if any element passes provided function test
+const someResult = everyWords.some((word) => word[0] === 'd');
+console.log(someResult);
+const goodRatings = books.every((book) => book.rating >= 3.5);
+console.log(goodRatings);
+const any2Authors = books.some((book) => book.authors.length === 2);
+console.log(any2Authors);
+
+// .sort() - does not sort int numerical order by default, callback must be used...
+// mutates array - use slice() with no params to create new array
+const prices = [400.5, 3000, 99.99, 35.99, 35.99, 12.0, 9500];
+console.log(prices.sort()); // sorts by first character
+// compare function is required arr.sort(comparFunc(a,b))
+/*
+if compare returns less than 0 sort a before b
+if compare returns 0 leave a and b unchanged with respect to each other
+if compare returns greater than 0 sort b before a
+*/
+console.log(prices.sort((a, b) => a - b)); // sorts in ascending order
+console.log(prices.sort((a, b) => b - a)); // sorts in descending order
+// sort an object
+books.sort((a, b) => a.rating - b.rating);
+console.log(books);
+
+// .reduce() - reduces array of values to a single value
+console.log(
+  [3, 5, 7, 9, 11].reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  )
+);
+// find max value
+const grades = [87, 64, 96, 88, 99, 73, 70, 64];
+const maxGrades = grades.reduce((max, currentValue) => {
+  if (currentValue > max) return currentValue;
+  return max;
+});
+console.log(maxGrades);
+const maxGrade2 = grades.reduce((max, currentValue) => {
+  return Math.max(max, currentValue);
+});
+console.log(maxGrade2);
+const minGrade = grades.reduce((min, currentValue) =>
+  Math.min(min, currentValue)
+);
+console.log(minGrade);
+// 3rd param of initial value, sets initial value of accumulator .reduce(acc, cur, 100)
+// defaults to 1st element if not specified!
+
+// use reduce to tally - set intial value as object
+const votes = ['y', 'y', 'n', 'y', 'n', 'y', 'n', 'n', 'n', 'y', 'y', 'n'];
+let voteTally = votes.reduce((tally, val) => {
+  if (tally[val]) {
+    tally[val]++;
+  } else {
+    tally[val] = 1;
+  }
+  return tally;
+}, {});
+console.log(voteTally);
+
+voteTally = votes.reduce((tally, val) => {
+  tally[val] = (tally[val] || 0) + 1;
+  return tally;
+}, {});
+console.log(voteTally);
