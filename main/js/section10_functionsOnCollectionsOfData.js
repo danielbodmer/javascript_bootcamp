@@ -71,6 +71,12 @@ const books = [
     rating: 3.67,
     genres: ['fiction'],
   },
+  {
+    title: 'A Truly Horrible Book',
+    authors: ['Xavier Time'],
+    rating: 2.18,
+    genres: ['fiction', 'garbage'],
+  },
 ];
 books.forEach(function (book) {
   console.log(book.title);
@@ -237,3 +243,12 @@ voteTally = votes.reduce((tally, val) => {
   return tally;
 }, {});
 console.log(voteTally);
+
+console.log(
+  books.reduce((groupedBooks, book) => {
+    const key = Math.floor(book.rating);
+    if (!groupedBooks[key]) groupedBooks[key] = [];
+    groupedBooks[key].push(book);
+    return groupedBooks;
+  }, {})
+);
