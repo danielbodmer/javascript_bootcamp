@@ -103,10 +103,65 @@ function fullName(first, last, ...titles) {
 
 fullName('Daniel', 'Bodmer', 'Sir', 'Most Awesome', 'The Best');
 
-// Destructuring Arrays
+// Destructuring Arrays - 'unpack' values from an array - properties from object into distinct variables
+const raceResults = [
+  'Eliud Kipchoge',
+  'Feyisa Lelisa',
+  'Galen Rupp',
+  'Ghirmay Ghebreslassie',
+  'Alphonce Simbu',
+  'Jared Ward',
+];
 
-// Destructuring Objects
+const [gold, silver, bronze] = raceResults;
+console.log(gold, silver, bronze);
+const [first, , third, , fith] = raceResults; // use commas to skip indexes
+console.log(first, third, fith);
+const [winner, ...others] = raceResults; // first element to variable, rest to array
+console.log(winner, others);
+
+// Destructuring Objects - unpack using prop name
+const runner = {
+  firstName: 'Eliud',
+  lastName: 'Kipchoge',
+  country: 'Kenya',
+  title: 'Elder of the Order of the Golden Heart of Kenya',
+};
+
+const { firstName, lastName } = runner;
+console.log(firstName, lastName);
+const { country: nation } = runner; // takes country prop and renames variable to nation
+console.log(nation);
 
 // Nested Destructuring
+const results = [
+  {
+    first: 'Eluid',
+    last: 'Kipchoge',
+    country: 'Kenya',
+  },
+  {
+    first: 'Feyisa',
+    last: 'Lilesa',
+    country: 'Ethiopia',
+  },
+  {
+    first: 'Galen',
+    last: 'Rupp',
+    country: 'United States',
+  },
+];
+const [, { country }] = results;
+console.log(country);
 
-// Destructuring Parameters
+// Destructuring Parameters - take only need props from an object or array! useful for apis? - must match name of object props!
+function print({ firstName, lastName, title }) {
+  return `${title} ${firstName} ${lastName}`;
+}
+console.log(print(runner));
+
+const response = ['HTTP/1.1', '200 OK', 'application/json'];
+function parseResponse([protocol, statusCode, contentType]) {
+  console.log(`Status: ${statusCode}`);
+}
+parseResponse(response);
