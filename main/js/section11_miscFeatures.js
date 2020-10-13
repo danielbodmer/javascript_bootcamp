@@ -89,7 +89,7 @@ console.log(sum(1, 2, 3, 4));
 
 // Rest - newer implementation of the arguments object
 // like spread - turns remaining arguments into an array
-// f(x, y, ...z)
+// f(x, y, ...z) - works in arrow functions (x, y, ...z) =>
 function sum(...nums) {
   return nums.reduce((a, b) => a + b);
 }
