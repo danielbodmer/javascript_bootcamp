@@ -16,7 +16,7 @@ const reviews = [4.5, 5.0, 3.44, 2.8, 3.5, 4.0, 3.5];
 const stats = getStats(reviews);
 console.table(stats);
 
-// computer properties - create dynamic key = use square bracket around key
+// computed properties - create dynamic key = use square bracket around key
 const role = 'host';
 const person = 'Jools Holland';
 const role2 = 'Director';
@@ -58,4 +58,47 @@ const auth = {
 auth.login();
 auth.logout();
 
-// THIS!
+// THIS! - a reference to the current execution scope
+function sayHi() {
+  console.log('Hi!');
+  console.log(this); // refers to global object (windows in browers - global in Node)
+}
+
+sayHi();
+
+const greet = function () {
+  console.log(this); // still refers to windows/global
+};
+
+greet();
+
+// this in methods in object refers to the object rather than the window
+const popStar = {
+  first: 'Cherilyn',
+  last: 'Sarkisian',
+  nickname: 'Cher',
+  fullname() {
+    const { first, last, nickname } = this; // save having to use this.value
+    console.log(this); // returns the object!
+    console.log(`${this.first} ${this.last} AKA ${this.nickname}`);
+    console.log(first, last, nickname);
+    return `${first} ${last} AKA ${nickname}`;
+  },
+  printBio() {
+    const fullName = this.fullname(); // use this to refernce the object itself
+    console.log(`${fullName} is a person`);
+    console.log(this);
+  },
+  laugh: () => {
+    console.log(this);
+    console.log(`${this.nickname} says hahahahaha!`);
+  }, // this gets sets to window for arrow functions - not recommended to use arrow functions for object methods
+};
+popStar.fullname();
+popStar.printBio();
+popStar.laugh();
+
+// This: Invocation context
+const printBio = person.printBio; // changes context of this and references window/globa
+
+// Annoyomatic Demo
