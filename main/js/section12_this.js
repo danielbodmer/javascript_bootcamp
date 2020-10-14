@@ -102,3 +102,32 @@ popStar.laugh();
 const printBio = person.printBio; // changes context of this and references window/globa
 
 // Annoyomatic Demo
+const annoyer = {
+  phrases: [
+    'Literally',
+    'cray cray',
+    "I can't even",
+    'Totes!',
+    'YOLO',
+    "Can't stop, won't stop",
+  ],
+  pickPhrase() {
+    const { phrases } = this;
+    const index = Math.floor(Math.random() * phrases.length);
+    return phrases[index];
+  },
+  start() {
+    /*
+    setInterval(function () {
+      // console.log(this.pickPhrase()); won't work as setInterval belongs in global scope - use an arrow function instead
+    }, 3000);
+    */
+    this.timerId = setInterval(() => console.log(this.pickPhrase()), 3000); // takes this from object rather than window
+  },
+  stop() {
+    clearInterval(this.timerId);
+  },
+};
+
+annoyer.start();
+annoyer.stop();
