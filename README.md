@@ -1,3 +1,3 @@
-# javascript_bootcamp
+# Udemy: The Modern Javascript Bootcamp 2020
 
-Udemy Javascript course
+Project files for the course
