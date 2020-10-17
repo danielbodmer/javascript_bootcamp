@@ -70,9 +70,57 @@ console.log(secondLi);
 
 // changing multiple elements
 const allLis = document.querySelectorAll('li');
+/*
 for (let li of allLis) {
   console.log(li.innerText);
   li.innerHTML = 'We are <b>The Champions!</b>';
 }
+*/
 
-// altering styles
+// altering styles - select elements and change css .style()
+console.log(h1.style); // doesn't show css from file, is indepent - starts with all styles set to "" - can only read inline styles
+h1.style.color = 'teal';
+h1.style.fontSize = '48px';
+
+const p = document.querySelector('#styles');
+p.style.color = 'red';
+const color = ['red', 'orange', 'teal', 'green', 'blue', 'purple'];
+
+/*
+allLis.forEach((el, idx) => {
+  el.style.color = color[idx];
+});
+*/
+
+// getComputedStyle(element) - retrieves style value from css file - can't set
+//console.log(getComputedStyle(h1));
+const h1Style = getComputedStyle(h1);
+console.log(h1Style.color);
+
+// manipulating Classes - add multiple CSS styles at once
+const todo = document.querySelector('#todos .todo');
+/*
+todo.style.color = 'gray';
+todo.style.textDecoration = 'line-through';
+todo.style.opacity = '50%';
+*/
+console.log(todo.classList); // prints classes of element and has it's own methods
+todo.classList.remove('done');
+todo.classList.add('done'); // adds css class to list
+todo.classList.toggle('done'); // turns clas on and off
+todo.classList.toggle('done');
+
+// creating elements
+const newH2 = document.createElement('h2');
+newH2.innerText = 'This header was created by JavaScript';
+newH2.classList.add('special');
+const section = document.querySelector('section');
+section.appendChild(newH2);
+
+const newImg = document.createElement('img');
+newImg.src =
+  'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80';
+newImg.classList.add('photo');
+document.body.append(newImg);
+
+// append, prepend, insertBefore

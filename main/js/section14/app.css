@@ -9,3 +9,26 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+.photo {
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  color: purple;
+  font-size: 60px;
+}
+
+.todo {
+  font-size: 30px;
+  color: olive;
+}
+
+.done {
+  color: gray;
+  text-decoration: line-through;
+  opacity: 50%;
+}
