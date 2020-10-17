@@ -57,4 +57,22 @@ console.log(range.getAttribute('step'));
 range.setAttribute('max', 1000);
 console.log(range.getAttribute('max'));
 
-// finding Parent/Child/Sibling
+// finding Parent/Child/Sibling - parentElement, children, nextSibling, previousSibling - access other elements based on current element
+const firstli = document.querySelector('li');
+console.log(firstli.parentElement); // returns <ul>
+console.log(firstli.parentElement.parentElement); // returns body
+console.log(firstli.parentElement.parentElement.parentElement); // returns html
+// parent goes up the DOM tree, .children goes down the tree
+console.log(ul.children); // returns collection of child elements
+// next/previous siblings - siblings share parent node
+const secondLi = firstli.nextSibling;
+console.log(secondLi);
+
+// changing multiple elements
+const allLis = document.querySelectorAll('li');
+for (let li of allLis) {
+  console.log(li.innerText);
+  li.innerHTML = 'We are <b>The Champions!</b>';
+}
+
+// altering styles
