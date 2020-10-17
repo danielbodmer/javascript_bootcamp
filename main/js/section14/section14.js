@@ -123,4 +123,9 @@ newImg.src =
 newImg.classList.add('photo');
 document.body.append(newImg);
 
+const newAnchor = document.createElement('a');
+newAnchor.href = 'https://www.youtube.com/watch?v=R6IcMDYDZWk';
+newAnchor.innerText = ' Link to a YouTube video';
+p.append(newAnchor);
+
 // append, prepend, insertBefore
