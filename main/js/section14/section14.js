@@ -149,4 +149,9 @@ append - can insert multiple element at end of parent - .append(item1, item2,)
 prepend - same as above but start of element
 */
 
-// removeChild & remove
+// removeChild & remove - remove doesn't need parent node
+const ulRemove = document.querySelector('section ul');
+const peas = ulRemove.querySelector('.special');
+const deleted = ulRemove.removeChild(peas); // returns removed element
+const carrots = document.querySelector('.remove-me');
+carrots.remove();

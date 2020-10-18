@@ -99,7 +99,7 @@ popStar.printBio();
 popStar.laugh();
 
 // This: Invocation context
-const printBio = person.printBio; // changes context of this and references window/globa
+const printBio = person.printBio; // changes context of this and references window/global
 
 // Annoyomatic Demo
 const annoyer = {
