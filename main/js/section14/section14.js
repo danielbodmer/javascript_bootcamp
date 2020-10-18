@@ -128,4 +128,25 @@ newAnchor.href = 'https://www.youtube.com/watch?v=R6IcMDYDZWk';
 newAnchor.innerText = ' Link to a YouTube video';
 p.append(newAnchor);
 
-// append, prepend, insertBefore
+// append, prepend, insertBefore - get called on a parent element
+const parentUl = document.querySelector('ul');
+const newLi = document.createElement('li');
+newLi.innerText = 'I am a new LI';
+newLi.classList.add('todo');
+parentUl.appendChild(newLi);
+
+const newLiBefore = document.createElement('li');
+newLiBefore.innerText = 'I was inserted at the start of list';
+const firstLi = document.querySelector('li.todo');
+parentUl.insertBefore(newLiBefore, firstLi); // must include child element of parernt that new element will be inserted before!
+const i = document.createElement('i');
+i.innerText = 'I Am Italics!!';
+const firstP = document.querySelector('p');
+firstP.insertAdjacentElement('beforebegin', i);
+// append, prepend
+/*
+append - can insert multiple element at end of parent - .append(item1, item2,)
+prepend - same as above but start of element
+*/
+
+// removeChild & remove
