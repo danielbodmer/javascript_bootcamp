@@ -5,6 +5,7 @@
 put code in HTML file using <element eventName="code()">
 in js code using element.eventType = funcion()
 */
+// only always one listener of each type - addEventListener can handle multiple
 const btn = document.querySelector('#clicker');
 btn.onclick = () => alert('You clicked me! But not very well :(');
 
@@ -13,3 +14,5 @@ const btnGood = document.querySelector('#good');
 const str = 'You used me in the best possible way! :D';
 const popUp = (str) => () => alert(str);
 btnGood.addEventListener('click', popUp(str));
+
+// The Impossible Button
