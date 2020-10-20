@@ -25,12 +25,48 @@ btn.classList.toggle('hidden');
 btnGood.classList.toggle('hidden');
 
 const impossible = document.querySelector('#impossible');
-const selectRandomPx = (dimension) => {
+const selectRandomPosition = (dimension) => {
   const rand = Math.floor(Math.random() * dimension) + 1;
   return `${rand.toString()}px`;
 };
 
 impossible.addEventListener('mouseover', function () {
-  impossible.style.left = selectRandomPx(window.innerWidth);
-  impossible.style.top = selectRandomPx(window.innerHeight);
+  impossible.style.left = selectRandomPosition(window.innerWidth);
+  impossible.style.top = selectRandomPosition(window.innerHeight);
 });
+impossible.addEventListener('click', function () {
+  impossible.innerText = 'You got me!';
+  document.body.style.backgroundColor = 'green';
+});
+
+impossible.classList.toggle('hidden');
+
+// events on multiple elements
+const colors = [
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'indigo',
+  'violet',
+];
+
+// !! remember me
+const changeColor = function () {
+  const h1 = document.querySelector('h1');
+  h1.style.color = this.style.backgroundColor;
+};
+
+const container = document.querySelector('#boxes');
+
+for (let color of colors) {
+  const box = document.createElement('div');
+  box.style.backgroundColor = color;
+  box.classList.add('box');
+  container.append(box);
+
+  // if function attached to an object, this called within function will refer to object
+  box.addEventListener('click', changeColor);
+}
