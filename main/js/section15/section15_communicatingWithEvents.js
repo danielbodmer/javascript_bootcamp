@@ -99,4 +99,5 @@ const createListItem = function (text) {
 
 addItemInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') itemsUl.append(createListItem(this.value));
+  this.value = '';
 });
