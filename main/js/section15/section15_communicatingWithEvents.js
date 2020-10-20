@@ -54,7 +54,8 @@ const colors = [
 ];
 
 // !! remember me
-const changeColor = function () {
+const changeColor = function (e) {
+  console.log(e); // show event object
   const h1 = document.querySelector('h1');
   h1.style.color = this.style.backgroundColor;
 };
@@ -70,3 +71,32 @@ for (let color of colors) {
   // if function attached to an object, this called within function will refer to object
   box.addEventListener('click', changeColor);
 }
+
+// the event object - automatically passed into callback when event added to element -- useulf for keypress events to get which key was pressed
+
+// Key Events: keypress, keyup & keydown
+const input = document.querySelector('#username');
+input.addEventListener('keydown', function (e) {
+  console.log('Key Down!');
+});
+input.addEventListener('keyup', function (e) {
+  console.log('Key Up!');
+});
+// character needs to display in page (i.e shift will not register a keypress but return will(?))
+input.addEventListener('keypress', function (e) {
+  console.log('Key Pressed!');
+  console.log(e);
+});
+
+const addItemInput = document.querySelector('#add-item');
+const itemsUl = document.querySelector('#items');
+
+const createListItem = function (text) {
+  const listItem = document.createElement('li');
+  listItem.innerText = text;
+  return listItem;
+};
+
+addItemInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') itemsUl.append(createListItem(this.value));
+});
