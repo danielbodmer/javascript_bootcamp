@@ -117,7 +117,7 @@ form.addEventListener('submit', function (e) {
   e.preventDefault(); // prevents default behaviour (i.e. stops form loading to new page)
 });
 
-// input & change events
+// input & change events (change works like input but needs to lose focus)
 const formData = {};
 creditCardInput.addEventListener('input', (e) => {
   formData['cc'] = e.target.value;
