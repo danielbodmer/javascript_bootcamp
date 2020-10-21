@@ -102,3 +102,10 @@ addItemInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') itemsUl.append(createListItem(this.value));
   this.value = '';
 });
+
+// Form Events & PreventDefault
+const form = document.querySelector('#signup-form');
+form.addEventListener('submit', function (e) {
+  alert('Submitting the form!');
+  e.preventDefault(); // prevents default behaviour (i.e. stops form loading to new page)
+});
