@@ -104,8 +104,39 @@ addItemInput.addEventListener('keypress', function (e) {
 });
 
 // Form Events & PreventDefault
+const creditCardInput = document.querySelector('#cc');
+const termsCheckbox = document.querySelector('#terms');
+const veggieSelect = document.querySelector('#veggie');
+
 const form = document.querySelector('#signup-form');
 form.addEventListener('submit', function (e) {
-  alert('Submitting the form!');
+  //alert('Submitting the form!');
+  console.log(creditCardInput.value);
+  console.log(termsCheckbox.checked);
+  console.log(veggieSelect.value);
   e.preventDefault(); // prevents default behaviour (i.e. stops form loading to new page)
 });
+
+// input & change events
+const formData = {};
+creditCardInput.addEventListener('input', (e) => {
+  formData['cc'] = e.target.value;
+  console.log(formData);
+});
+
+const captureData = (obj, target, name) => (e) => {
+  obj[name] = e.target[target];
+  console.log(formData);
+};
+
+veggieSelect.addEventListener(
+  'input',
+  captureData(formData, 'value', 'veggie')
+);
+
+for (let input of [creditCardInput, termsCheckbox, veggieSelect]) {
+  input.addEventListener('input', ({ target }) => {
+    const { name, type, value, checked } = target;
+    formData[name] = type === 'checkbox' ? checked : value;
+  });
+}
