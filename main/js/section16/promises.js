@@ -39,9 +39,26 @@ const fakeRequest = (url) => {
     setTimeout(() => {
       const pages = {
         '/users': [
-          { id: 1, username: 'bilbox' },
+          { id: 1, username: 'bilbo' },
           { id: 5, username: 'esmerelda' },
         ],
+        '/users/1': {
+          id: 1,
+          username: 'bilbo',
+          upvotes: 360,
+          city: 'lisbon',
+          topPostId: 454321,
+        },
+        '/users/5': {
+          id: 5,
+          username: 'esmerelda',
+          upvotes: 570,
+          city: 'honolulu',
+        },
+        '/posts/454321': {
+          id: 454321,
+          title: 'Ladies & Gentleman, may I introduce my pet pig, Hamlet',
+        },
         '/about': 'this is the about page',
       };
       const data = pages[url];
@@ -50,11 +67,27 @@ const fakeRequest = (url) => {
     }, 3000);
   });
 };
+/*
 fakeRequest('/users')
   .then((res) => {
     console.log(res.status);
     console.log(res.data);
   })
   .catch((res) => console.log(res.status));
+*/
 
-// promise chaining
+// promise chaining - make sure to return a promise when chaining!!!
+// only one catch is needed when chaining
+fakeRequest('/users')
+  .then((res) => {
+    const id = res.data[0].id;
+    return fakeRequest(`/users/${id}`);
+  })
+  .then((res) => {
+    const postId = res.data.topPostId;
+    return fakeRequest(`/posts/${postId}`);
+  })
+  .then((res) => console.log(res.data.title))
+  .catch((err) => console.log(err));
+
+// promise refactor
