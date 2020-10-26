@@ -79,6 +79,8 @@ fetch(url, {headers object}) returns promise
 --> use the .json() method to read stream to completion to get the full set of data
 --> .json() method returns a promise
 --> fetch promise only rejects on network failure - 404 still returns a response
+
+--> fetch(url, {headers}).then((response) => response.json().then((data)) => log data)).catch((err) => log error)
 */
 fetch('https://swapi.dev/api/planets/')
   .then((response) => {
@@ -98,3 +100,43 @@ fetch('https://swapi.dev/api/planets/')
   });
 
 // chaining fetch requests
+fetch('https://swapi.dev/api/planets/')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Status Code Error: ${response.status}`);
+    } else return response.json();
+  })
+  .then((data) => {
+    const filmData = data.results[1].films[0];
+    return fetch(filmData);
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Status Code Error: ${response.status}`);
+    } else return response.json();
+  })
+  .then((data) => console.log('Chained fetch film title: ', data.title))
+  .catch((err) => console.log(err));
+
+// refactoring fetch chains
+const checkStatusAndParse = (response) => {
+  if (!response.ok) {
+    throw new Error(`Status Code Error: ${response.status}`);
+  } else return response.json();
+};
+const logPlanets = (data) => {
+  console.log('Loading 10 planets...');
+  data.results.forEach((planet) => console.log(planet.name));
+  return Promise.resolve(data.next); // creates resolved promise
+};
+const fetchNextPlanets = (url = 'https://swapi.dev/api/planets/') => fetch(url);
+
+fetchNextPlanets()
+  .then(checkStatusAndParse)
+  .then(logPlanets)
+  .then(fetchNextPlanets)
+  .then(checkStatusAndParse)
+  .then(logPlanets)
+  .catch((err) => console.log(err));
+
+// Axios
