@@ -124,19 +124,54 @@ const checkStatusAndParse = (response) => {
     throw new Error(`Status Code Error: ${response.status}`);
   } else return response.json();
 };
-const logPlanets = (data) => {
-  console.log('Loading 10 planets...');
-  data.results.forEach((planet) => console.log(planet.name));
+const logPlanets = (loadingMessage) => (data) => {
+  console.log(loadingMessage);
+  data.results.forEach((planet, idx) => console.log(`${idx}: ${planet.name}`));
   return Promise.resolve(data.next); // creates resolved promise
 };
 const fetchNextPlanets = (url = 'https://swapi.dev/api/planets/') => fetch(url);
 
 fetchNextPlanets()
   .then(checkStatusAndParse)
-  .then(logPlanets)
+  .then(logPlanets('Loading first 10 planets...'))
   .then(fetchNextPlanets)
   .then(checkStatusAndParse)
-  .then(logPlanets)
+  .then(logPlanets('Loading next 10 planets...'))
   .catch((err) => console.log(err));
 
-// Axios
+// Axios - A library for making http requests
+axios
+  .get('https://swapi.dev/api/planets/')
+  .then((res) => {
+    console.log('Axios GET:', res.data.results[0]);
+  })
+  .catch((error) => console.log(error));
+
+// sequential axios requests
+const fetchPlanets = (url = 'https://swapi.dev/api/planets/') => {
+  return axios.get(url);
+};
+const printPlanets = ({ data }) => {
+  console.log(data);
+  for (let planet of data.results) console.log(planet.name);
+  return fetchPlanets(data.next);
+};
+
+axios
+  .get('https://swapi.dev/api/planets/')
+  .then(({ data }) => {
+    console.log(data.results);
+    for (let planet of data.results) console.log(planet.name);
+    return axios.get(data.next);
+  })
+  .then(({ data }) => {
+    console.log(data);
+    for (let planet of data.results) console.log(planet.name);
+  })
+  .catch((err) => console.log(err));
+
+fetchPlanets()
+  .then(printPlanets)
+  .then(printPlanets)
+  .then(printPlanets)
+  .catch((err) => console.log(err));
