@@ -27,13 +27,48 @@ const firstRequest = new XMLHttpRequest();
 firstRequest.addEventListener('load', function () {
   // this.responseText won't work in arrow function, use variableName.responseText instead
   const data = JSON.parse(this.responseText);
-  console.log('request successful', data.results);
+  console.log('request successful', data);
 });
 
 firstRequest.addEventListener('error', (err) => {
   console.log('request failed', err);
 });
 
-firstRequest.open('GET', 'https://swapi.dev/people/1/');
-//firstRequest.setRequestHeader('Accept', 'application/json');
+firstRequest.open('get', 'https://swapi.dev/api/planets/', true);
+firstRequest.setRequestHeader('Accept', 'application/json');
 firstRequest.send();
+
+// chaining XMLHttpRequest
+const firstReq = new XMLHttpRequest();
+firstReq.addEventListener('load', function () {
+  const data = JSON.parse(this.responseText);
+  console.log(data.results[0]);
+
+  const filmURl = data.results[0].films[0];
+  const filmRequest = new XMLHttpRequest();
+
+  filmRequest.addEventListener('readystatechange', function () {
+    if (this.readyState === 4) {
+      const filmData = JSON.parse(this.responseText);
+      console.log(filmData);
+      console.log(filmData.title);
+    }
+  });
+
+  filmRequest.addEventListener('error', () => {
+    console.log('error getting film data');
+  });
+
+  filmRequest.open('get', filmURl);
+  filmRequest.send();
+});
+
+firstReq.addEventListener('error', function (e) {
+  console.log('error getting data', e);
+});
+
+firstReq.open('get', 'https://swapi.dev/api/planets/');
+firstReq.send();
+console.log('request sent to swapi for planet data');
+
+// a better way! Fetch! - supports promises
