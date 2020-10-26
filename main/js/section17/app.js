@@ -154,7 +154,7 @@ const fetchPlanets = (url = 'https://swapi.dev/api/planets/') => {
 const printPlanets = ({ data }) => {
   console.log(data);
   for (let planet of data.results) console.log(planet.name);
-  return fetchPlanets(data.next);
+  return Promise.resolve(data.next);
 };
 
 axios
@@ -172,6 +172,6 @@ axios
 
 fetchPlanets()
   .then(printPlanets)
-  .then(printPlanets)
+  .then(fetchPlanets)
   .then(printPlanets)
   .catch((err) => console.log(err));
