@@ -72,3 +72,29 @@ firstReq.send();
 console.log('request sent to swapi for planet data');
 
 // a better way! Fetch! - supports promises
+/*
+fetch(url, {headers object}) returns promise
+--> resolved returns a response object
+--> response object contains a readable stream in the body prop of the object
+--> use the .json() method to read stream to completion to get the full set of data
+--> .json() method returns a promise
+--> fetch promise only rejects on network failure - 404 still returns a response
+*/
+fetch('https://swapi.dev/api/planets/')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Status Code Error: ${response.status}`); // triggers catch on initial promise
+    } else {
+      response.json().then((data) => {
+        console.log('fetch API');
+        for (let planet of data.results) {
+          console.log(planet.name);
+        }
+      });
+    }
+  })
+  .catch((err) => {
+    console.log('something went wrong with fetch', err);
+  });
+
+// chaining fetch requests
