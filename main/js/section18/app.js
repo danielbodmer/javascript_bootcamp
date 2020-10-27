@@ -53,3 +53,34 @@ async function getPlanetsTryCatch(url) {
 getPlanetsTryCatch('https://swapi.dev/api/planes');
 
 // multiple awaits
+const moveX = (element, amount, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const bodyBoundary = document.body.clientWidth;
+      const elRight = element.getBoundingClientRect().right;
+      const currLeft = element.getBoundingClientRect().left;
+
+      if (elRight + amount > bodyBoundary) {
+        reject({ bodyBoundary, elRight, amount });
+      } else {
+        element.style.transform = `translateX(${currLeft + amount}px)`;
+        resolve();
+      }
+    }, delay);
+  });
+};
+
+const btn = document.querySelector('button');
+async function animateRight(el) {
+  await moveX(el, 100, 1000);
+  await moveX(el, 100, 1000);
+  await moveX(el, 100, 1000);
+  await moveX(el, 100, 1000);
+  await moveX(el, 100, 1000);
+  moveX(el, 100, 1000);
+}
+animateRight(btn).catch((err) => console.log('all done!', err));
+
+// parallel vs sequential requests
+
+// refactoring with Promise.all
