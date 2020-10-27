@@ -82,5 +82,58 @@ async function animateRight(el) {
 animateRight(btn).catch((err) => console.log('all done!', err));
 
 // parallel vs sequential requests
+async function get3PokemonSequential() {
+  // below run in sequence - one after each other - better when requests are related to each other
+  const poke1 = await axios.get('https://pokeapi.co/api/v2/pokemon/1');
+  const poke2 = await axios.get('https://pokeapi.co/api/v2/pokemon/2');
+  const poke3 = await axios.get('https://pokeapi.co/api/v2/pokemon/3');
+  console.log(poke1.data);
+  console.log(poke2.data);
+  console.log(poke3.data);
+}
+get3PokemonSequential();
+
+async function get3PokemonParallel() {
+  // without await, variable becomes a promises and run in parallel
+  // useful when multiple unrelated requests are neeeded
+  const promise1 = axios.get('https://pokeapi.co/api/v2/pokemon/1');
+  const promise2 = axios.get('https://pokeapi.co/api/v2/pokemon/2');
+  const promise3 = axios.get('https://pokeapi.co/api/v2/pokemon/3');
+  // turns the promise into usuable data
+  const poke1 = await promise1;
+  const poke2 = await promise2;
+  const poke3 = await promise3;
+
+  console.log(poke1.data);
+  console.log(poke2.data);
+  console.log(poke3.data);
+}
+get3PokemonParallel();
+
+function changeBodyColor(color, delay) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      document.body.style.backgroundColor = color;
+      resolve();
+    }, delay);
+  });
+}
+
+async function lightShow() {
+  await changeBodyColor('teal', 1000);
+  await changeBodyColor('pink', 1000);
+  await changeBodyColor('indigo', 1000);
+  await changeBodyColor('violet', 1000);
+}
+lightShow();
 
 // refactoring with Promise.all
+async function get3PokemonPromiseAll() {
+  const promise1 = axios.get('https://pokeapi.co/api/v2/pokemon/1');
+  const promise2 = axios.get('https://pokeapi.co/api/v2/pokemon/2');
+  const promise3 = axios.get('https://pokeapi.co/api/v2/pokemon/3');
+
+  const results = await Promise.all([promise1, promise2, promise3]);
+  console.log('Here are your pokemon: ', results);
+}
+get3PokemonPromiseAll();
